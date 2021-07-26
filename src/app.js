@@ -1,7 +1,10 @@
 const express = require("express");
+var cors = require('cors');
 const app = new express();
 const ytdl = require('ytdl-core');
 const port = process.env.PORT || 3000;
+
+app.use(cors());
 
 app.get("/fetch", async (req,res)=>{
     try{
