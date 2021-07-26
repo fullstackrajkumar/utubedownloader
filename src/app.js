@@ -3,10 +3,6 @@ const app = new express();
 const ytdl = require('ytdl-core');
 const port = process.env.PORT || 3000;
 
-app.get("/", (req,res)=>{
-    res.send("Hello this is working...");
-});
-
 app.get("/fetch", async (req,res)=>{
     try{
         const vid = await ytdl.getURLVideoID(req.query.url);
@@ -47,5 +43,4 @@ app.get("/fetch", async (req,res)=>{
 });
 
 app.listen(port,()=>{
-    console.log("server is running...");
 });
