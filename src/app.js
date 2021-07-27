@@ -52,7 +52,7 @@ app.get("/fetch", async (req,res)=>{
         }
         res.status(200).json({
             "length" : narray.length,
-            "title" : info.title,
+            "title" : info.player_response.videoDetails.title,
             "thumbnail" : info.player_response.microformat.playerMicroformatRenderer.thumbnail.thumbnails[0].url,
             "videos" : narray
         });
