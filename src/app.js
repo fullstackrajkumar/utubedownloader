@@ -1,16 +1,22 @@
 const express = require("express");
-var cors = require('cors');
+const cors = require('cors');
 const app = new express();
 const ytdl = require('ytdl-core');
 const port = process.env.PORT || 3000;
 
-app.use((req,res,next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-})
+// app.use((req,res,next) => {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+// });
 
-app.use(cors());
+app.use(cors({
+    "origin": "*",
+    "methods": "GET",
+    "preflightContinue": true,
+    "optionsSuccessStatus": 204,
+    "access-control-allow-credentials": true
+}));
 
 app.get("/fetch", async (req,res)=>{
     try{
@@ -45,7 +51,7 @@ app.get("/fetch", async (req,res)=>{
                 }
             }
         }
-        res.status(200).send(narray);
+        res.status(200).json({"length" : narray.length, "videos" : narray});
     }catch(e){
         res.status(400).send(e);
     }
