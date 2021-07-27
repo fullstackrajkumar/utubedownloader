@@ -50,7 +50,11 @@ app.get("/fetch", async (req,res)=>{
                 }
             }
         }
-        res.status(200).json({"length" : narray.length, "videos" : narray});
+        res.status(200).json({
+            "length" : narray.length,
+            "thumbnail" : info.player_response.microformat.playerMicroformatRenderer.thumbnail.thumbnails[0].url,
+            "videos" : narray
+        });
     }catch(e){
         res.status(400).send(e);
     }
