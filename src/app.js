@@ -4,12 +4,10 @@ const app = new express();
 const ytdl = require('ytdl-core');
 const port = process.env.PORT || 3000;
 
-// app.use((req,res,next) => {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     next();
-// });
+// Allowing json in project
+app.use(express.json());
 
+// use cors to avoid cors errors
 app.use(cors({
     "origin": "*",
     "methods": "GET",
@@ -18,10 +16,7 @@ app.use(cors({
     "access-control-allow-credentials": true
 }));
 
-app.get("/data/:url", async (req,res) => {
-    res.send(req.params.url);
-});
-
+// Main fetch path to find the videos url
 app.get("/fetch", async (req,res)=>{
     try{
         const vid = await ytdl.getURLVideoID(req.query.url);
@@ -61,5 +56,6 @@ app.get("/fetch", async (req,res)=>{
     }
 });
 
+// Listening of ports
 app.listen(port,()=>{
 });
