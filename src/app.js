@@ -18,9 +18,12 @@ app.use(cors({
     "access-control-allow-credentials": true
 }));
 
-app.get("/fetch", async (req,res)=>{
-    try{
-        const vid = await ytdl.getURLVideoID(req.query.url);
+app.get("/data/:url", async (req,res) => {
+    res.send(req.params.url);
+});
+
+async function fetch(url){
+    const vid = await ytdl.getURLVideoID(url);
         let info = await ytdl.getInfo(vid);
         const respondArray = info.player_response.streamingData.formats;
         const narray = [];
@@ -51,7 +54,13 @@ app.get("/fetch", async (req,res)=>{
                 }
             }
         }
-        res.status(200).json({"length" : narray.length, "videos" : narray});
+        return {"length" : narray.length, "videos" : narray};
+}
+
+app.get("/fetch", async (req,res)=>{
+    try{
+        const result = await fetch(req.query.url);
+        res.status(200).send(result);
     }catch(e){
         res.status(400).send(e);
     }
