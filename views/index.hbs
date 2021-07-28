@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Youtube Downloader</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;500&display=swap">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+</head>
+<body>
+	<div class="container-fluid p-0">
+		<!-- Navbar Section -->
+		<nav class="navbar navbar-expand-lg">
+			<a class="navbar-brand" href="#">Utube</a>
+		</nav>
+
+		<!-- Banner Section -->
+		<div class="banner">
+			<form>
+				<div class="container section">
+					<h1 class="text-center">Download Youtube Videos Very Easily</h1>
+					<div class="row">
+						<div class="col-md-9 mb-3">
+							<input type="text" autocomplete="off" name="url" class="form-control" id="link" placeholder="Paste your link here..." required>
+							</div>
+						<div class="col-md-3">
+							<button type="button" class="btn btn-primary w-100 btn-block" id="find">
+								<span id="loader">
+									<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>&nbsp;
+								<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>&nbsp;
+								<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+								</span><span id="text">Search</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<!-- Videos Section -->
+		<div class="container video-section" id="success">
+			<div class="row">
+				<div class="col-md-6 text-center">
+					<img src="assets/thumbnail.jpg" class="img-thumbnail">
+				</div>
+				<div class="col-md-6" id="data">
+					<div class="row" id="title"><h4></h4></div>
+					<div id="links"></div>
+				</div>
+			</div>
+		</div>
+		<div class="container video-section" id="error">
+			<h5></h5>
+		</div>
+
+		<!-- Guide Section -->
+		<div class="container guide">
+			<h3 class="text-center">How to Download</h3>
+			<div class="row">
+				<div class="col-md-5 steps">
+					<div class="row">
+						<div class="col-1 dot"><h5>1</h5></div>
+						<div class="col step"><h5>Copy the link</h5></div>
+					</div>
+					<div class="row">
+						<div class="col-1 dot"><h5>2</h5></div>
+						<div class="col step"><h5>Paste link and click search</h5></div>
+					</div>
+					<div class="row">
+						<div class="col-1 dot"><h5>3</h5></div>
+						<div class="col step"><h5>Choose Quality</h5></div>
+					</div>
+					<div class="row">
+						<div class="col-1 dot"><h5>4</h5></div>
+						<div class="col step"><h5>Click three dots</h5></div>
+					</div>
+					<div class="row">
+						<div class="col-1 dot"><h5>5</h5></div>
+						<div class="col step"><h5>Click Download </h5></div>
+					</div>
+				</div>
+				<div class="col-md-7 gif">
+					<img src="assets/tut.gif" class="img-fluid">
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Footer Section -->
+	<footer class="bg-dark">
+        <div class="container-fluid p-0">
+            <div  class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5>Utube</h5>
+                        <hr>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3495.616142271584!2d78.78314185721383!3d28.820510838147932!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1627045447621!5m2!1sen!2sin" width="100%" height="auto" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div class="col-md-3">
+                        <h5>Services</h5>
+                        <hr>
+                        <a href="#"><h6>Youtube Downloader</h6></a>
+                    </div>
+                    <div class="col-md-3">
+                        <h5>Menu</h5>
+                        <hr>
+                        <a href="/"><h6>Home</h6></a>
+                    </div>
+                    <div class="col-md-3">
+                        <h5>Subscription</h5>
+                        <hr>
+                        <input type="email" placeholder="Enter the email">
+                        <button type="submit">Subscribe</button>
+                    </div>
+                </div>
+                <hr>
+                <p>Copyright All rights reserved. Designed by Prince</p>
+            </div>
+        </div>
+    </footer>
+	<script src="js/control.js"></script>
+</body>
+</html>
