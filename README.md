@@ -3,7 +3,7 @@ Youtube Downloader
 How to run app on server
 
 1. Clone the repository with command
-  git clone https://github.com/professionalprince/utubedownloader
+  git clone https://github.com/fullstackrajkumar/utubedownloader
   
 2. Open utubedownloader
   cd utubedownloader
