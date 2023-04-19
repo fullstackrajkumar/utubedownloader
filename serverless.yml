@@ -1,0 +1,18 @@
+service: Utubedownloader
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  iam:
+    role: arn:aws:iam::765270870358:role/lambda_role
+  memorySize: 1024
+  stage: development
+  timeout: 10
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http: ANY /{proxy+}
+      - http: ANY /

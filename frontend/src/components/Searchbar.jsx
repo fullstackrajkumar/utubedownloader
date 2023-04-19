@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
+const BASE_URL = "https://qi7zkmt5ag.execute-api.us-east-1.amazonaws.com/development"
 
 const Searchbar = ({ onResultsFetch }) => {
     const [url, setUrl] = useState('')
     const [isLoading, setLoading] = useState(false)
     const fetchInfo = () => {
         setLoading(true)
-        fetch('http://localhost:3000/fetch?url=' + url).then((res) => res.json()).then((response) => {
+        fetch(BASE_URL+'/fetch?url=' + url).then((res) => res.json()).then((response) => {
             setLoading(false);
             if (response.status) {
                 onResultsFetch(response)

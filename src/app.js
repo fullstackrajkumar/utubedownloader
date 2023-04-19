@@ -4,13 +4,13 @@ const app = new express();
 const path = require("path");
 const ytdl = require('ytdl-core');
 require('dotenv').config()
-const port = process.env.PORT || 3005;
+const port = process.env.PORT || 3000;
 
 // Allowing hbs to use
 app.set('view engine', 'hbs');
 
 // using statc path
-app.use(express.static(path.join(__dirname, '../public')));
+// app.use(express.static(path.join(__dirname, '../public')));
 
 // Allowing json in project
 app.use(express.json());
@@ -25,9 +25,9 @@ app.use(cors({
 }));
 
 // Main route
-app.get("/", (req, res) => {
-    res.sendFile('./index.html');
-});
+// app.get("/*", (req, res) => {
+//     res.sendFile('./index.html');
+// });
 
 // Main fetch path to find the videos url
 app.get("/fetch", async (req, res) => {
@@ -79,6 +79,4 @@ app.get("/fetch", async (req, res) => {
     }
 });
 
-// Listening of ports
-app.listen(port, () => {
-});
+module.exports = app
