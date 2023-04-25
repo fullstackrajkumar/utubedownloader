@@ -22,6 +22,7 @@
     "hbs": "^4.1.2",
     "nodemon": "^2.0.12",
     "serverless-http": "^3.2.0",
+    "youtube-search": "^1.1.6",
     "ytdl-core": "^4.9.0"
   }
 }

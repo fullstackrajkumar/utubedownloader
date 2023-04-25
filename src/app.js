@@ -3,6 +3,7 @@ const cors = require('cors');
 const app = new express();
 const path = require("path");
 const ytdl = require('ytdl-core');
+var search = require('youtube-search');
 require('dotenv').config()
 const port = process.env.PORT || 3000;
 
@@ -64,7 +65,7 @@ app.get("/fetch", async (req, res) => {
             }
         }
         res.status(200).json({
-            "status" : true,
+            "status": true,
             "length": narray.length,
             "title": info.player_response.videoDetails.title,
             "thumbnail": info.player_response.microformat.playerMicroformatRenderer.thumbnail.thumbnails[0].url,
@@ -72,11 +73,45 @@ app.get("/fetch", async (req, res) => {
         });
     } catch (e) {
         res.status(400).send({
-            status : false,
-            code : 400,
-            message : e.message
+            status: false,
+            code: 400,
+            message: e.message
         });
     }
 });
+
+app.get('/search', async (req, res) => {
+    try {
+        const { search_query } = req.query;
+        var opts = {
+            maxResults: 10,
+            type: 'video',
+            key: process.env.YOUTUBE_API_KEY
+          };
+          
+          search(search_query, opts, function(err, results) {
+            if(err){
+                res.status(400).send({
+                    status: false,
+                    code: 400,
+                    message: err.message
+                });
+            }else{
+                res.status(200).send({
+                    status : true,
+                    code : 200,
+                    message : "Fetched",
+                    data : results
+                });
+            }
+          });
+    } catch (err) {
+        res.status(400).send({
+            status: false,
+            code: 400,
+            message: e.message
+        });
+    }
+})
 
 module.exports = app
