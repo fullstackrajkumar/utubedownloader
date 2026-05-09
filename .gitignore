@@ -1,4 +1,8 @@
 node_modules
+.env
+.env.*
+!.env.example
+*-player-script.js
 jspm_packages
 public/
 

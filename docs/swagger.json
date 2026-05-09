@@ -1,0 +1,185 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Utube Downloader API Documentation",
+      "description": "Download YouTube videos without any hassle",
+      "version": "1.0.0",
+      "contact": {
+        "name": "API Support",
+        "email": "fullstack.rajkumar@gmail.com"
+      }
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000"
+      },
+      {
+        "url": "https://api.utube.rajkumaryadav.online"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Fetch",
+        "description": "Get video metadata and stream URLs from a YouTube URL"
+      },
+      {
+        "name": "Search",
+        "description": "Search YouTube for videos"
+      }
+    ],
+    "paths": {
+      "/fetch": {
+        "get": {
+          "tags": ["Fetch"],
+          "summary": "Get video by URL",
+          "description": "Fetch a single single video information by URL",
+          "parameters": [
+            {
+              "name": "url",
+              "in": "query",
+              "required": true,
+              "description": "Youtube video URL",
+              "schema": {
+                "type": "string",
+                "example": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Video metadata and format URLs",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": { "type": "boolean", "example": true },
+                      "length": { "type": "integer" },
+                      "title": { "type": "string" },
+                      "thumbnail": { "type": "string", "format": "uri" },
+                      "videos": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "itag": { "type": "integer" },
+                            "quality": { "type": "string" },
+                            "url": { "type": "string", "format": "uri" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Missing URL, invalid URL, or ytdl error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": { "type": "boolean", "example": false },
+                      "code": { "type": "integer", "example": 400 },
+                      "message": { "type": "string" }
+                    }
+                  },
+                  "examples": {
+                    "validation": {
+                      "value": {
+                        "status": false,
+                        "code": 400,
+                        "message": "URL is required"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/search": {
+        "get": {
+          "tags": ["Search"],
+          "summary": "Search YouTube videos",
+          "description": "Returns up to 10 video results for the given query. The server must be configured with `YOUTUBE_API_KEY`.",
+          "parameters": [
+            {
+              "name": "search_query",
+              "in": "query",
+              "required": true,
+              "description": "Keywords to search for",
+              "schema": {
+                "type": "string",
+                "example": "lofi hip hop"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Search results from the YouTube Data API",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "required": ["status", "code", "message", "data"],
+                    "properties": {
+                      "status": { "type": "boolean", "example": true },
+                      "code": { "type": "integer", "example": 200 },
+                      "message": { "type": "string", "example": "Fetched" },
+                      "data": {
+                        "type": "array",
+                        "maxItems": 10,
+                        "items": {
+                          "type": "object",
+                          "description": "Item shape follows the `youtube-search` package / YouTube Data API snippet fields.",
+                          "properties": {
+                            "link": { "type": "string", "format": "uri" },
+                            "id": { "type": "string" },
+                            "title": { "type": "string" },
+                            "description": { "type": "string" },
+                            "thumbnail": { "type": "string", "format": "uri" },
+                            "kind": { "type": "string" },
+                            "channelTitle": { "type": "string" },
+                            "channelId": { "type": "string" },
+                            "publishedAt": { "type": "string" }
+                          },
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Missing `search_query`, YouTube API error, or other failure",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": { "type": "boolean", "example": false },
+                      "code": { "type": "integer", "example": 400 },
+                      "message": { "type": "string" }
+                    }
+                  },
+                  "examples": {
+                    "missingQuery": {
+                      "value": {
+                        "status": false,
+                        "code": 400,
+                        "message": "Search query is required"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
