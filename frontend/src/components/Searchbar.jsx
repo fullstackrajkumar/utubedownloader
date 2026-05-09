@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-const BASE_URL = "https://qi7zkmt5ag.execute-api.us-east-1.amazonaws.com/development"
+const BASE_URL = process.env.REACT_APP_API_URL
 
 const View = ({title,image, onClick}) => {
     return <div className='resultss text-start bg-white d-flex justify-content-between ms-4 me-4 p-1 align-items-center border-bottom' onClick={onClick}>
